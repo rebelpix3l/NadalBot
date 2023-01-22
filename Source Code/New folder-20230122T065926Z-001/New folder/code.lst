@@ -1,0 +1,73 @@
+MPASM  5.50                          CODE.ASM   12-12-2022  15:38:12         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[207]: Found label after column 1. (portb)
+  00000006            00001         portb EQU 0x06
+Warning[207]: Found label after column 1. (trisb)
+  00000006            00002         trisb EQU 0x06
+Warning[207]: Found label after column 1. (status)
+  00000003            00003     status EQU 0x03
+Warning[207]: Found label after column 1. (portc)
+  00000007            00004         portc EQU 0x07
+Warning[207]: Found label after column 1. (trisc)
+  00000007            00005         trisc EQU 0x07
+                      00006         
+                      00007 
+000000                00008                         ORG 0x0000
+                      00009 
+000000 EF10 F000      00010                         GOTO main
+                      00011 
+000020                00012                         ORG 0x0020
+000020 8A03           00013 main:           BSF status, 5; Select Bank 1
+000022 8007           00014                         BSF trisc, 0; put RC0 as Input
+000024 6A06           00015                         CLRF trisb; put portb as Output
+000026 9A03           00016                         BCF status, 5; select Bank0
+000028 B007           00017 again:          BTFSC portc, 0; Is pushbutton pressed?
+00002A EF1C F000      00018                         GOTO notPressed
+00002E 0E02           00019                         MOVLW 0x02
+000030 6E06           00020                         MOVWF portb; All LEDs ON
+000032 9006           00021                         BCF portb, 0;
+000034 EF14 F000      00022                         GOTO again
+000038                00023 notPressed:
+000038 0E01           00024                         MOVLW 0x01
+00003A 6E06           00025                         MOVWF portb; Every other LED is ON
+00003C 9206           00026                         BCF portb, 1;
+00003E EF14 F000      00027                         GOTO again
+                      00028                         END
+MPASM  5.50                          CODE.ASM   12-12-2022  15:38:12         PAGE  2
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+__18F452                          00000001
+__DEBUG                           1
+again                             00000028
+main                              00000020
+notPressed                        00000038
+portb                             00000006
+portc                             00000007
+status                            00000003
+trisb                             00000006
+trisc                             00000007
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXX------------ ---------------- XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XX-------------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Bytes Used:    38
+Program Memory Bytes Free: 32730
+
+
+Errors   :     0
+Warnings :     5 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+
