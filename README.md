@@ -6,6 +6,6 @@ Tennis Ball Shooter, based on the PIC16F877A made for Microprocessors & Embedded
 Youtube Video: https://youtu.be/77WqfbJvtE4
 
 By:
-Roa'a Badran,
+Roa’a Hasan,
 Sara Maher,
 Nizar Al-Daradkeh
