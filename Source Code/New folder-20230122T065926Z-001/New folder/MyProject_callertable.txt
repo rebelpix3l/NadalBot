@@ -1,4 +1,0 @@
-main
-interrupt
-	left
-	right
